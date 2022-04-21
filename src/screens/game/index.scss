@@ -1,0 +1,65 @@
+@import '../../index.scss';
+
+
+.game-wrapper{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100vh;
+    background-color: rgb(107, 107, 107);
+    // flex-wrap: row wrap;
+
+    .title-wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: rgb(230, 230, 230);
+        
+        .main-title{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 10vw;
+            font-weight: bold;
+        }
+
+        .sub-title{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 4vw;
+            color: rgb(238, 16, 16);
+            // font-weight: bold;
+            
+        }
+    }
+
+    .words-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+}
+
+@media (min-width:768px){
+    .game-wrapper{
+        width:768px;
+        border: 1px solid black;
+        margin: 5px auto;
+        height: 98vh;
+        
+        .title-wrapper{
+            text-align: center;
+            
+            .main-title{
+                font-size: 80px;
+            }
+    
+            .sub-title{
+                font-size: 35px;
+                color: red;       
+            }
+        }
+    
+    
+    }
+    
+}

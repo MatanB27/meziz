@@ -1,0 +1,52 @@
+.keyboard-wrapper{
+    width:100%;
+    
+    &.disabled{
+        pointer-events: none;
+    }
+
+    .row{
+        display: flex;
+        justify-content: center;
+    }
+
+    .key{
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: rgba(241, 241, 241, 0.397);
+        font-weight: bold;
+        height:10vw;
+        width:10vw;
+        font-size: 4vw;
+        margin: 2px;
+        color: rgb(230, 230, 230);
+        
+        &:hover{
+            color: black;
+            background-color: rgba(218, 218, 218, 0.397);
+        }
+
+        &.failed{
+            pointer-events: none;
+            background-color: rgb(238, 16, 16);
+            color: black;
+        }
+
+        &.success{
+            pointer-events: none;
+            background-color: green;
+            color: black;
+        }
+    }
+}
+
+@media (min-width: 768px){
+    .keyboard-wrapper{
+     
+        .key{
+            height:60px;
+            width:60px;
+            font-size: 22px;
+        }
+    }
+}

@@ -1,0 +1,52 @@
+@import '../../index.scss';
+
+$succeed-color: rgb(80, 219, 80);
+
+.word-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: rgb(230, 230, 230);
+    margin: 0 2vw 35px 15px;
+
+    .word{
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 6vw;
+        font-weight: bold;
+    }
+}
+
+.space-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2vw;
+
+    .space{
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14vw;
+    }
+}
+
+@media (min-width: 768px){
+    .word-wrapper{
+        width: 50px;
+        height: 120px;
+        // padding: 0 10px 0 10px;
+
+        .word{
+            font-size: 42px;
+        }
+    }
+    
+    .space-wrapper{
+        margin-right: 20px;
+    
+        .space{
+        
+            font-size: 70px;
+        }
+    }
+}
