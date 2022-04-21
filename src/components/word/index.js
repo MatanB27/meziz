@@ -16,7 +16,7 @@ function Word(props) {
                     <span className={'word'}>_</span>
                     :
                 word !== ' ' ? 
-                <span className={'word'}>{word}</span> :
+                <span className={'word'}>{word.toUpperCase()}</span> :
                 <span className={'space'}>-</span>
 
             }
