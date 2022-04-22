@@ -29,6 +29,22 @@
             // font-weight: bold;
             
         }
+
+        .subtitle{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 3vw;
+            text-align: center;
+        }
+
+        .winning{
+            color:green;
+            font-weight: bold;
+        }
+        
+        .losing{
+            color:red;
+            font-weight: bold;
+        }
     }
 
     .words-wrapper{
@@ -56,6 +72,10 @@
             .sub-title{
                 font-size: 35px;
                 color: red;       
+            }
+
+            .subtitle{
+                font-size: 18px;
             }
         }
     

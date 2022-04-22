@@ -94,7 +94,22 @@ function Game(){
     }
 
 
-    const getEndGameTitle = () => {
+    const getEndGameTitle = (text, winning) => {
+        return(
+            <>
+                <span className={(winning ? 'winning' : 'losing') + " subtitle"}>
+                    {text}
+                </span>
+                Click <span className="share-button subtitle">Here</span> to share your results!
+                    <br/>
+                        <span className="subtitle">The word was {currentWord}</span>
+                    <br/>
+                    <span className="subtitle">Next word in Xx:Xx:Xx</span>
+            </>
+            
+        )
+    }
+    const getTitle = () => {
         if(!isGameEnd){
             return(
                 <span className="sub-title">
@@ -105,27 +120,11 @@ function Game(){
 
         if(isGameWon){
             return(
-                <span className="winning subtitle">
-                    Congratulations, you won the game after {numOfGuesses} guesses.
-                    <br/>
-                    Click <span className="share-button">Here</span> to share your results!
-                    <br/>
-                        <span>The word was {currentWord}</span>
-                    <br/>
-                    <span className="">Next word in Xx:Xx:Xx</span>
-                </span>
+                getEndGameTitle(`Congratulations, you won the game after ${numOfGuesses} guesses.`, isGameWon)
             )
         }else if(isGameEnd){
             return(
-                <span className="losing subtitle">
-                    You reached {numOfGuesses} guesses and lost the game!
-                    <br/>
-                    Click <span className="share-button">Here</span> to share your results!
-                    <br/>
-                        <span>The word was {currentWord}</span>
-                    <br/>
-                    Next word in xx:xx:xx
-                </span>
+                getEndGameTitle(`Game over! you reached ${numOfGuesses} guesses and lost.`, isGameWon)
             )
         }
     }
@@ -137,7 +136,7 @@ function Game(){
                     Guess the word
                 </span>
                 {   
-                    getEndGameTitle()
+                    getTitle()
                 }
                 
             </div>
