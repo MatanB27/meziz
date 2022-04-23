@@ -32,8 +32,21 @@
 
         .subtitle{
             font-family: Verdana, Geneva, Tahoma, sans-serif;
-            font-size: 3vw;
+            display: inline-block;
+            font-size: 3.3vw;
             text-align: center;
+        }
+
+        .subtitle.wrapper{
+            background-color:white;
+            padding: 30px;
+            margin: 20px;
+            box-shadow: 3px 4px 24px 4px black;
+        }
+
+        .share-button{
+            cursor: pointer;
+            text-decoration: underline;
         }
 
         .winning{

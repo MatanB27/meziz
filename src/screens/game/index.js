@@ -97,14 +97,21 @@ function Game(){
     const getEndGameTitle = (text, winning) => {
         return(
             <>
-                <span className={(winning ? 'winning' : 'losing') + " subtitle"}>
+                <span className={(winning ? 'winning' : 'losing') + " subtitle wrapper"}>
                     {text}
                 </span>
-                Click <span className="share-button subtitle">Here</span> to share your results!
+                <span className={'subtitle'}>
+                    Click <span className={'share-button'}>Here</span> To share your result
+                    <br/>
+                    Today FuzZle was {currentWord}
+                    <br/>
+                    Next FuzZle in Xx:xX:Xx
+                </span>
+                {/* Click <span className="share-button subtitle">Here</span> to share your results!
                     <br/>
                         <span className="subtitle">The word was {currentWord}</span>
                     <br/>
-                    <span className="subtitle">Next word in Xx:Xx:Xx</span>
+                    <span className="subtitle">Next word in Xx:Xx:Xx</span> */}
             </>
             
         )
