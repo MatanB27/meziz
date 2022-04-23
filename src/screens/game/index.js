@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Word from '../../components/word';
 import Keyboard from '../../components/keyboard';
 import { generateSlug } from "random-word-slugs";
+import Header from '../../components/header';
 import {handleKeyPress, handleEndGame, handleWinGame} from "../../rules";
 
 function Game(){
@@ -138,10 +139,8 @@ function Game(){
 
     return(
         <div className="game-wrapper">
+            <Header/>
             <div className="title-wrapper">
-                <span className="main-title">
-                    Guess the word
-                </span>
                 {   
                     getTitle()
                 }

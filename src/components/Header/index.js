@@ -1,10 +1,14 @@
 
+import './index.scss';
+import QuestionMark from '../../images/circular-question-mark.png';
 
 function Header(){
     return(
         <div className="header-wrapper">
             <div className="header-title">FuzZle</div>
-            <span>About us</span>
+            <img className="about-img"
+                src={QuestionMark}/>
+                
         </div>
     )
 }

@@ -1,1 +1,22 @@
 @import '../../index.scss';
+
+.header-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    border-bottom: 1px solid #a0a0a0;
+
+    .header-title{
+        font-family: "Helvetica Neue",Helvetica,Arial;
+        color: white;
+        font-weight: bold;
+        font-size: 32px;
+    }
+
+    .about-img{
+        cursor: pointer;
+        width: 28px;
+        margin-left: 5px;
+    }
+}

@@ -4,7 +4,7 @@
 .game-wrapper{
     display:flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     height: 100vh;
     background-color: rgb(107, 107, 107);
     // flex-wrap: row wrap;
@@ -83,7 +83,7 @@
             }
     
             .sub-title{
-                font-size: 35px;
+                font-size: 26px;
                 color: red;       
             }
 
