@@ -4,6 +4,7 @@ import Word from '../../components/word';
 import Keyboard from '../../components/keyboard';
 import { generateSlug } from "random-word-slugs";
 import Header from '../../components/header';
+import DrawMan from '../../components/draw-man';
 import {handleKeyPress, handleEndGame, handleWinGame} from "../../rules";
 
 function Game(){
@@ -22,7 +23,6 @@ function Game(){
         const generatedWord = generateSlug(1, { format: "title" });;
         const word  = getWord(generatedWord);
         setCurrentWord(word);
-        console.log(word);
         setJsonWord(buildJson(convertStringToArray(word)));
     },[]);
     
@@ -147,7 +147,9 @@ function Game(){
                 
             </div>
             <div className="person-wrapper">
-
+                <DrawMan
+                    numOfGuesses={numOfGuesses}
+                />
             </div>
             <div className="words-wrapper">
                 {
