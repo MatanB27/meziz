@@ -5,6 +5,7 @@ function DrawMan(props) {
     const {
         numOfGuesses
     } = props;
+    
     return(
         <div className="draw-man-wrapper">
             

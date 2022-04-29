@@ -139,7 +139,9 @@ function Game(){
 
     return(
         <div className="game-wrapper">
-            <Header/>
+            <Header
+                numOfGuesses={numOfGuesses}
+            />
             <div className="title-wrapper">
                 {   
                     getTitle()
