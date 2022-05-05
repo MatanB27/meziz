@@ -11,13 +11,13 @@ function Popup(props){
     console.log(isPopup);
     return(
         <div className={"popup-wrapper " + (!isPopup ? 'disabled' : '')}>
-            <div className={"black-screen " + + (!isPopup ? 'disabled' : '')} 
+            <div className={"black-screen " + (!isPopup ? 'disabled' : '')} 
                 onClick={() => setIsPopup(false)}></div>
-            <div className='popup'>
+            <div className={'popup '  + (!isPopup ? 'disabled' : '')}>
                 <div className='popup-text-wrapper'>
                     <span className="popup-title">Rules</span>
                     <span className='popup-text'>
-                        Every day you will get a new FuzZle
+                        Each day you will get a new FuzZle
                         <br/>
                         You have 10 guesses each game.
                         <br/>
@@ -25,6 +25,7 @@ function Popup(props){
                         with the least amount of guesses.
                         <br/>
                         Good luck!
+                        <span className='company'>FuzZle</span>
                     </span>
                 </div>
                 

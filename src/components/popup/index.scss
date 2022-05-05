@@ -3,42 +3,72 @@
     top: 0;
     right: 0;
     opacity: 1;
-    transition: .3s;
+    transition: .2s;
     color: white;
     
     &.disabled{
         // display: none;
         height:0;
         width: 0;
-        transition: .3s;
+        transition: .2s;
         opacity: 0;
     }
 
     .black-screen{
+        display: block;
         cursor: pointer;
         background: black;
         opacity: 0.6;
         height: 100vh;
         width: 100vw;
         overflow: hidden;
-        transition: .3s;
+        transition: .2s;
 
         &.disabled{
             opacity: 0;
+            display: none;
             
         }
     }
 
     .popup{
+        display:block;
         position: absolute;
         background: #6b6b6b;
         height: 50%;
         width: 45%;
         top: 24%;
         left: 26%;
-        transition: .3s;
-        box-shadow: 3px 3px 7px 1px black;
+        transition: .2s;
+        box-shadow: 3px 3px 7px 1px rgb(32, 32, 32);
 
+        &.disabled{
+            display:none;
+        }
+        
+        .popup-text-wrapper{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .popup-title{
+                font-size: 5vw;
+                border-bottom: 2px solid black;
+            }
+
+            .popup-text{
+                padding: 3vw;
+                font-size: 3vw;
+
+                .company{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-top: 6vw;
+                    font-size: 8vw;
+                }
+            }
+        }
     }
 }
 
@@ -50,6 +80,26 @@
             width: 768px;
             overflow: hidden;
         
+        }
+
+        .popup{
+           
+            .popup-text-wrapper{
+
+                .popup-title{
+                    font-size: 35px;
+                }
+    
+                .popup-text{
+                    padding: 25px;
+                    font-size: 22px;
+    
+                    .company{
+                        margin-top: 30px;
+                        font-size: 60px;
+                    }
+                }
+            }
         }
     }
         
