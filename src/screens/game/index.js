@@ -95,6 +95,17 @@ function Game(){
     }
 
 
+    console.log(currentWord);
+    const handleShare = () => {
+        navigator.clipboard.writeText('I won current Fuzzle after '  + numOfGuesses + ' guesses!');
+        let copyElement = document.getElementById('copy-result');
+        copyElement.classList.remove('disabled');
+
+        setTimeout(() => {
+            copyElement.classList.add('disabled');
+        }, 2000)
+    }
+
     const getEndGameTitle = (text, winning) => {
         return(
             <>
@@ -102,17 +113,14 @@ function Game(){
                     {text}
                 </span>
                 <span className={'subtitle'}>
-                    Click <span className={'share-button'}>Here</span> To share your result
+                    {   winning &&
+                        <span>Click <span className={'share-button'} onClick={handleShare}>Here</span> To share your result</span>
+                    }
                     <br/>
                     Today FuzZle was {currentWord}
                     <br/>
                     Next FuzZle in Xx:xX:Xx
                 </span>
-                {/* Click <span className="share-button subtitle">Here</span> to share your results!
-                    <br/>
-                        <span className="subtitle">The word was {currentWord}</span>
-                    <br/>
-                    <span className="subtitle">Next word in Xx:Xx:Xx</span> */}
             </>
             
         )
@@ -142,6 +150,9 @@ function Game(){
             <Header
                 numOfGuesses={numOfGuesses}
             />
+            <div id="copy-result" className="copy-result disabled">
+                Copy to clipboard
+            </div>
             <div className="title-wrapper">
                 {   
                     getTitle()

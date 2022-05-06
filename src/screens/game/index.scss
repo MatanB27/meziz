@@ -10,6 +10,22 @@
     position: relative;
     // flex-wrap: row wrap;
 
+    .copy-result{
+        visibility: visible;
+        opacity: 1;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        position: absolute;
+        background-color:white;
+        padding: 22px;
+        font-weight: bold;
+        transition: .2s ease-in-out;
+
+        &.disabled{
+            visibility: hidden;
+            opacity: 0;
+            transition: .2s ease-in-out;
+        }
+    }
     .title-wrapper{
         display: flex;
         flex-direction: column;
