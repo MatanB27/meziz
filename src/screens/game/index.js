@@ -5,6 +5,8 @@ import Keyboard from '../../components/keyboard';
 import { generateSlug } from "random-word-slugs";
 import Header from '../../components/header';
 import DrawMan from '../../components/draw-man';
+import firebase from '../../firebase';
+
 import {handleKeyPress, handleEndGame, handleWinGame} from "../../rules";
 
 function Game(){
@@ -19,11 +21,21 @@ function Game(){
     const [isGameEnd, setGameEnd] = useState(false);
     const [isGameWon, setIsGameWon] = useState(false);
     const [render, setRender] = useState(false);
+
     useEffect(() => {
         const generatedWord = generateSlug(1, { format: "title" });;
         const word  = getWord(generatedWord);
         setCurrentWord(word);
         setJsonWord(buildJson(convertStringToArray(word)));
+
+
+        // const db = firebase.firestore();
+        // const something = db.collection('something');
+        // something.onSnapshot((snap) => {
+        //     snap.forEach((doc) => {
+        //         console.log(doc.data());
+        //     })
+        // })
     },[]);
     
     const buildJson = (wordArr) => {
@@ -95,7 +107,6 @@ function Game(){
     }
 
 
-    console.log(currentWord);
     const handleShare = () => {
         navigator.clipboard.writeText('I won current Fuzzle after '  + numOfGuesses + ' guesses!');
         let copyElement = document.getElementById('copy-result');
