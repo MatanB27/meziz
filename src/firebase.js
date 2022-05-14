@@ -3,13 +3,13 @@ import 'firebase/compat/firestore';
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDWvpLMFvD-P47eR94u2uFWf9wqDE3-z5Q",
-    authDomain: "fuzzle-53002.firebaseapp.com",
-    projectId: "fuzzle-53002",
-    storageBucket: "fuzzle-53002.appspot.com",
-    messagingSenderId: "859107978798",
-    appId: "1:859107978798:web:c35a1033fa072b55d7f9bf"
-  };
+  apiKey: "AIzaSyBC7ZKIuzBdSi7ABP1igonw0XWKnISUCjU",
+  authDomain: "fuzzle-4b549.firebaseapp.com",
+  projectId: "fuzzle-4b549",
+  storageBucket: "fuzzle-4b549.appspot.com",
+  messagingSenderId: "217885208163",
+  appId: "1:217885208163:web:f8d305457a5943eaed9256"
+};
 
   firebase.initializeApp(firebaseConfig);
 
