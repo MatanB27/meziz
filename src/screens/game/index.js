@@ -28,14 +28,23 @@ function Game(){
         setCurrentWord(word);
         setJsonWord(buildJson(convertStringToArray(word)));
 
+        const db = firebase.firestore();
+        const words = db.collection('words');
+        
+        const MAX = 1095;
+        for(let i = 0; i < MAX; i++){
 
-        // const db = firebase.firestore();
-        // const something = db.collection('something');
-        // something.onSnapshot((snap) => {
-        //     snap.forEach((doc) => {
-        //         console.log(doc.data());
-        //     })
-        // })
+        //TODO: USE ONLY FOR NEW WORDS!!
+        // fetch(
+        //     "https://random-word-api.herokuapp.com/word")
+        //                 .then((res) => res.json())
+        //                 .then((data) => {
+        //                     const payload = {word: data[0]}
+                        
+        //                         words.add(payload);
+        //                 })
+        //             }
+        
     },[]);
     
     const buildJson = (wordArr) => {
