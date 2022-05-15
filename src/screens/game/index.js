@@ -5,7 +5,7 @@ import Keyboard from '../../components/keyboard';
 import { generateSlug } from "random-word-slugs";
 import Header from '../../components/header';
 import DrawMan from '../../components/draw-man';
-import firebase from '../../firebase';
+import firebase, {addNewWords, getNewWord} from '../../firebase';
 
 import {handleKeyPress, handleEndGame, handleWinGame} from "../../rules";
 
@@ -23,30 +23,30 @@ function Game(){
     const [render, setRender] = useState(false);
 
     useEffect(() => {
-        const generatedWord = generateSlug(1, { format: "title" });;
-        const word  = getWord(generatedWord);
-        setCurrentWord(word);
-        setJsonWord(buildJson(convertStringToArray(word)));
-
-        const db = firebase.firestore();
-        const words = db.collection('words');
         
-        const MAX = 1095;
-        for(let i = 0; i < MAX; i++){
+        getNewWord();
+        // const db = firebase.firestore();
+        // const words = db.collection('words');
+        //TODO: DONT USE! 
+        // addNewWords(words);
 
-        //TODO: USE ONLY FOR NEW WORDS!!
-        // fetch(
-        //     "https://random-word-api.herokuapp.com/word")
-        //                 .then((res) => res.json())
-        //                 .then((data) => {
-        //                     const payload = {word: data[0]}
-                        
-        //                         words.add(payload);
-        //                 })
-        //             }
+        // getNewWordWithFirebase(words, setCurrentWord);
         
     },[]);
     
+
+    const getNewWord = () => {
+        fetch(
+            "https://random-word-api.herokuapp.com/word")
+                .then((res) => res.json())
+                .then((data) => {
+                    const word  = getWord(data[0]);
+                    setCurrentWord(word);
+                    setJsonWord(buildJson(convertStringToArray(word)));
+                
+        })
+    }
+
     const buildJson = (wordArr) => {
         let json = {wordArr:[]}
         wordArr.forEach(word => {
@@ -184,11 +184,16 @@ function Game(){
                     numOfGuesses={numOfGuesses}
                 />
             </div>
-            <div className="words-wrapper">
-                {
-                    getContainers()
-                }           
-            </div>
+            {
+                currentWord ? 
+            
+                    <div className="words-wrapper">
+                        {
+                            getContainers()
+                        }           
+                    </div> : 
+                    <div className="loading">Loading...</div>
+            }
             <div className={"keyboard-wrapper " + (isGameEnd ? 'disabled' : '')} >
                     <Keyboard
                         onClick={(e) => handleKeyboard(e)}

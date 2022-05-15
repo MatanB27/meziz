@@ -11,13 +11,6 @@ export const handleKeyPress = (jsonWord, keyPress) => {
             }
         })
     })
-    // Object.entries(jsonWord).map(([word, isShown], index) => {
-    //     if(word.toUpperCase() === keyPress){
-    //         isSuccess = true;
-    //         jsonWord[word] = true;
-    //     }
-    // })
-
     if (isSuccess)  return true;
     else            return false;
 }
@@ -36,11 +29,5 @@ export const handleWinGame = (jsonWord) => {
             }
         })
     })
-    // Object.values(jsonWord).map((isShown) => {
-    //     console.log(isShown);
-    //     if(isShown === false){
-    //         isPlayerWin = false;
-    //     }
-    // })
     return isPlayerWin;
 }

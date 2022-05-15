@@ -10,6 +10,11 @@
     position: relative;
     // flex-wrap: row wrap;
 
+    .loading{
+        font-size: 22px;
+        text-align: center;
+        color: white;
+    }
     .copy-result{
         visibility: visible;
         opacity: 1;
