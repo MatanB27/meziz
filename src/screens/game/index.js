@@ -2,7 +2,6 @@ import './index.scss';
 import React, { useEffect, useState } from 'react';
 import Word from '../../components/word';
 import Keyboard from '../../components/keyboard';
-import { generateSlug } from "random-word-slugs";
 import Header from '../../components/header';
 import DrawMan from '../../components/draw-man';
 import firebase, {addNewWords, getNewWord} from '../../firebase';
@@ -25,6 +24,7 @@ function Game(){
     useEffect(() => {
         
         getNewWord();
+        
         // const db = firebase.firestore();
         // const words = db.collection('words');
         //TODO: DONT USE! 
@@ -141,6 +141,17 @@ function Game(){
                     <br/>
                     Next FuzZle in Xx:xX:Xx
                 </span>
+
+                <div className='stats-wrapper'>
+                    <div className='stats'>
+                        <span className='stats-title winning'>Winning</span>
+                        <span className='stats-value'>x</span>
+                    </div>
+                    <div className='stats'>
+                        <span className='stats-title losing'>Losing</span>
+                        <span className='stats-value'>y</span>
+                    </div>
+                </div>
             </>
             
         )
@@ -186,20 +197,24 @@ function Game(){
             </div>
             {
                 currentWord ? 
-            
+                    <>
                     <div className="words-wrapper">
                         {
                             getContainers()
                         }           
-                    </div> : 
+                    </div> 
+                    <div className={"keyboard-wrapper " + (isGameEnd ? 'disabled' : '')} >
+                        <Keyboard
+                            onClick={(e) => handleKeyboard(e)}
+                            clickedKeys={clickedKeys}
+                        />
+                    </div>
+                    </>
+                    : 
                     <div className="loading">Loading...</div>
             }
-            <div className={"keyboard-wrapper " + (isGameEnd ? 'disabled' : '')} >
-                    <Keyboard
-                        onClick={(e) => handleKeyboard(e)}
-                        clickedKeys={clickedKeys}
-                    />
-            </div>
+            
+            
         </div>
     );
 }
