@@ -41,6 +41,7 @@
         left: 26%;
         transition: .2s;
         box-shadow: 3px 3px 7px 1px rgb(32, 32, 32);
+        overflow: auto;
 
         &.disabled{
             display:none;
