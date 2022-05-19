@@ -4,8 +4,9 @@ import Word from '../../components/word';
 import Keyboard from '../../components/keyboard';
 import Header from '../../components/header';
 import DrawMan from '../../components/draw-man';
+// import calculateTimeLeft from '../../components/calculateTimeLeft';
 import firebase, {addNewWords, getNewWord} from '../../firebase';
-
+import {getLocalStorage, addToLocalStorage, isSameDate} from '../../local-storage';
 import {handleKeyPress, handleEndGame, handleWinGame} from "../../rules";
 
 function Game(){
@@ -21,20 +22,33 @@ function Game(){
     const [isGameWon, setIsGameWon] = useState(false);
     const [render, setRender] = useState(false);
 
-    useEffect(() => {
-        
-        getNewWord();
-        
-        // const db = firebase.firestore();
-        // const words = db.collection('words');
-        //TODO: DONT USE! 
-        // addNewWords(words);
 
-        // getNewWordWithFirebase(words, setCurrentWord);
+    const [statistics, setStatistics] = useState(
+            {
+                is_played: false,
+                current_win: '',
+                winning: 0,
+                losing: 0,
+            }
+        );
+
+    useEffect(() => {
+        const today = new Date();
+        const currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         
+        const isPlayed = getLocalStorage('statistics')?.is_played;
+        const date = getLocalStorage('date');
+        
+        if(!isSameDate(currentDate, date)){
+            addToLocalStorage('date', currentDate);
+            if(!isPlayed){
+                addToLocalStorage('statistics', statistics);
+            }
+        }
+        getNewWord();
     },[]);
     
-
+    
     const getNewWord = () => {
         fetch(
             "https://random-word-api.herokuapp.com/word")
@@ -139,7 +153,7 @@ function Game(){
                     <br/>
                     Today FuzZle was {currentWord}
                     <br/>
-                    Next FuzZle in Xx:xX:Xx
+                    Come back again tomorrow for another FuzZle!
                 </span>
 
                 <div className='stats-wrapper'>
@@ -190,11 +204,11 @@ function Game(){
                 }
                 
             </div>
-            <div className="person-wrapper">
+            {/* <div className="person-wrapper">
                 <DrawMan
                     numOfGuesses={numOfGuesses}
                 />
-            </div>
+            </div> */}
             {
                 currentWord ? 
                     <>

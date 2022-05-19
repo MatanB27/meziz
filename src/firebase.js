@@ -30,6 +30,16 @@ const firebaseConfig = {
 //   }
 // }
 
+
+// if needed
+// const db = firebase.firestore();
+        // const words = db.collection('words');
+        //TODO: DONT USE! 
+        // addNewWords(words);
+
+        // getNewWordWithFirebase(words, setCurrentWord);
+
+
 // Getting a random word
 export function getNewWordWithFirebase(words, setCurrentWord) {
   words.onSnapshot((query) => {

@@ -8,7 +8,6 @@ function Popup(props){
         isPopup,
     } = props;
 
-    console.log(isPopup);
     return(
         <div className={"popup-wrapper " + (!isPopup ? 'disabled' : '')}>
             <div className={"black-screen " + (!isPopup ? 'disabled' : '')} 
