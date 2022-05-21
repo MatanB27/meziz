@@ -6,7 +6,12 @@ import Header from '../../components/header';
 import DrawMan from '../../components/draw-man';
 // import calculateTimeLeft from '../../components/calculateTimeLeft';
 import firebase, {addNewWords, getNewWord} from '../../firebase';
-import {getLocalStorageItem, addToLocalStorage, isSameDate} from '../../local-storage';
+import {
+    getLocalStorageItem,
+     addToLocalStorage
+     , isSameDate,
+        addDataForNewPlayers,
+    } from '../../local-storage';
 import {handleKeyPress, handleEndGame, handleWinGame} from "../../rules";
 
 function Game(){
@@ -25,6 +30,7 @@ function Game(){
     const [loseAmount, setLoseAmount] = useState(0);
 
     useEffect(() => {
+        addDataForNewPlayers();
         getStarted();
     },[]);
     
@@ -42,31 +48,24 @@ function Game(){
         
         if(isSameDate(currentDate, localStoageSate)){
             if(isPlayed){
+                // Show stats
                 setCurrentWord(localStorageWord);
                 setNumOfGuesses(localStorageNumOfGuesses);
+                setWinAmount(localStorageWinAmount);
+                setLoseAmount(localStorageLoseAmount);
+
+                // Prev won or lose
                 setIsGameWon(localStorageIsWon);
-
-                if(localStorageWinAmount){
-                    setWinAmount(localStorageWinAmount);
-                }else{
-                    setWinAmount(0);
-                }
-
-                if(localStorageLoseAmount){
-                    setLoseAmount(localStorageLoseAmount);
-                }else{
-                    setLoseAmount(0);
-                }
-                
-                
-                const currentWin = getLocalStorageItem('current_win')?.current_win;
-                if(currentWin){
+                if(localStorageIsWon){
                     setGameEnd(true);
+                    setIsGameWon(true);
                     getEndGameTitle('text', true);
                 }else{
                     setGameEnd(true);
+                    setIsGameWon(false);
                     getEndGameTitle('text', false);
                 }
+
             }else{
                 getNewWord();
             }
@@ -74,6 +73,7 @@ function Game(){
             getNewWord();
             addToLocalStorage('date', currentDate);
         }
+    
     }
     
     const getNewWord = () => {
@@ -205,8 +205,8 @@ function Game(){
                 </span>
             )
         }
-
-        if(isGameWon){
+        
+        if(isGameWon){  
             handleGameEnd(isGameWon);
             return(
                 getEndGameTitle(`Congratulations, you won the game after ${numOfGuesses} guesses.`, isGameWon)
@@ -217,55 +217,34 @@ function Game(){
                 getEndGameTitle(`Game over! you reached ${numOfGuesses} guesses and lost.`, isGameWon)
             )
         }
+
+        
     }
 
     const handleGameEnd = (isWon) => {
         addToLocalStorage('prev_word', currentWord);
         addToLocalStorage('num_of_guesses', numOfGuesses);
         const is_played = getLocalStorageItem('is_played');
-        console.log('win', winAmount);
-        console.log('lose', loseAmount);
-        if(!is_played){
-            let win = getLocalStorageItem('win');
-            let lose = getLocalStorageItem('lose');
+
+        let win = getLocalStorageItem('win');
+        let lose = getLocalStorageItem('lose');
+
+        if(!is_played){ // In case user refresh the page he wont get more loses or wins          
             if(isWon){
                 addToLocalStorage('current_win', true);
-                
-
-                if(!win){
-                    addToLocalStorage('win', 1);
-                    setWinAmount(1);
-                }else{
-                    addToLocalStorage('win', ++win);
-                    setWinAmount(win);
-                }
-                if(!lose){
-                    setLoseAmount(0);
-                }else{
-                    setLoseAmount(lose);
-                }
-        
+                addToLocalStorage('win', ++win);
+                addToLocalStorage('lose', lose);
+                setWinAmount(win);
             }else{
                 addToLocalStorage('current_win', false);
-                
-                if(!lose){
-                    addToLocalStorage('lose', 1);
-                    setLoseAmount(1);
-                }else{
-                    addToLocalStorage('lose', ++lose);
-                    setLoseAmount(lose);
-                }
-
-                if(!win){
-                    setWinAmount(0);
-                }else{
-                setWinAmount(win)
-                }
+                addToLocalStorage('lose', ++lose);
+                addToLocalStorage('win', win);
+                setLoseAmount(lose);
             }
         }
-        
         addToLocalStorage('is_played', true);
     }
+
 
     return(
         <div className="game-wrapper">
