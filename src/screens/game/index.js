@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react';
 import Word from '../../components/word';
 import Keyboard from '../../components/keyboard';
 import Header from '../../components/header';
-import DrawMan from '../../components/draw-man';
 // import calculateTimeLeft from '../../components/calculateTimeLeft';
 import firebase, {addNewWords, getNewWord} from '../../firebase';
 import {
     getLocalStorageItem,
-     addToLocalStorage
-     , isSameDate,
-        addDataForNewPlayers,
+    addToLocalStorage,
+    isSameDate,
+    addDataForNewPlayers,
+    getKeyboardFromLS,
     } from '../../local-storage';
 import {handleKeyPress, handleEndGame, handleWinGame} from "../../rules";
 
@@ -23,6 +23,9 @@ function Game(){
     const [currentWord, setCurrentWord] = useState('');
     const [numOfGuesses, setNumOfGuesses] = useState(0);
     const [clickedKeys, setClickedKeys] = useState({});
+    const [clickedKeysArr, setClickedKeysArr] = useState({
+        wordArr:[]
+    });
     const [isGameEnd, setGameEnd] = useState(false);
     const [isGameWon, setIsGameWon] = useState(false);
     const [render, setRender] = useState(false);
@@ -46,7 +49,13 @@ function Game(){
         const localStorageWinAmount = getLocalStorageItem('win');
         const localStorageLoseAmount = getLocalStorageItem('lose');
         const localStorageIsWon = getLocalStorageItem('current_win');
+        const jsonWordLS = getLocalStorageItem('json_word');
         
+        if(jsonWordLS){
+            setClickedKeysArr(jsonWordLS);
+            getKeyboardFromLS();
+        }
+
         setWinAmount(localStorageWinAmount);
         setLoseAmount(localStorageLoseAmount);
 
@@ -77,6 +86,7 @@ function Game(){
     
     }
     
+
     const getNewWord = () => {
         fetch(
             "https://random-word-api.herokuapp.com/word")
@@ -120,7 +130,7 @@ function Game(){
         }
         
         clickedKeys[currKey] = isCorrect;
-        
+        setClickedKeysArr({'wordArr':clickedKeys});  
     }
     
    
@@ -223,18 +233,23 @@ function Game(){
     }
 
     const handleGameEnd = (isWon) => {
-        addToLocalStorage('prev_word', currentWord);
-        addToLocalStorage('num_of_guesses', numOfGuesses);
+
         const is_played = getLocalStorageItem('is_played');
         const localStoageDate = getLocalStorageItem('date');
+        
+        addToLocalStorage('prev_word', currentWord);
+        addToLocalStorage('num_of_guesses', numOfGuesses);
+        addToLocalStorage('json_word', clickedKeysArr);
 
         let win = getLocalStorageItem('win');
         let lose = getLocalStorageItem('lose');
+        
         /*
              In case user refresh the page
              Or after a new date 
              he wont get more loses or wins 
         */
+
         if(!is_played || !isSameDate(currentDate, localStoageDate)){          
             if(isWon){
                 console.log('won');
@@ -253,7 +268,6 @@ function Game(){
         }
         addToLocalStorage('is_played', true);
     }
-
 
     return(
         <div className="game-wrapper">
@@ -275,22 +289,20 @@ function Game(){
                 />
             </div> */}
             {
-                currentWord ? 
-                    <>
+                <>
                     <div className="words-wrapper">
                         {
                             getContainers()
                         }           
                     </div> 
-                    <div className={"keyboard-wrapper " + (isGameEnd ? 'disabled' : '')} >
+                    <div className={"keyboard-wrapper " + (isGameEnd ? 'disabled' : '')
+                + (!currentWord ? 'disabled' : '')} >
                         <Keyboard
                             onClick={(e) => handleKeyboard(e)}
                             clickedKeys={clickedKeys}
                         />
                     </div>
-                    </>
-                    : 
-                    <div className="loading">Loading...</div>
+                </>
             }
             
             

@@ -10,7 +10,6 @@ function Keyboard(props){
     } = props;
 
     const handleClickedKey = () => {
-        console.log();
         const elements = document.getElementsByClassName('key');
         Object.entries(clickedKeys).map(([key, value] )=> {
             [...elements].forEach(element =>{
