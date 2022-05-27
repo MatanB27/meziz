@@ -28,7 +28,7 @@ function Game(){
     const [render, setRender] = useState(false);
     const [winAmount, setWinAmount] = useState(0);
     const [loseAmount, setLoseAmount] = useState(0);
-
+    const [currentDate, setCurrentDate] = useState('');
     useEffect(() => {
         addDataForNewPlayers();
         getStarted();
@@ -37,22 +37,24 @@ function Game(){
     const getStarted = () => {
         const today = new Date();
         const currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        
+        setCurrentDate(currentDate);
+
         const isPlayed = getLocalStorageItem('is_played');
-        const localStoageSate = getLocalStorageItem('date');
+        const localStoageDate = getLocalStorageItem('date');
         const localStorageWord = getLocalStorageItem('current_word');
         const localStorageNumOfGuesses = getLocalStorageItem('num_of_guesses');
         const localStorageWinAmount = getLocalStorageItem('win');
         const localStorageLoseAmount = getLocalStorageItem('lose');
         const localStorageIsWon = getLocalStorageItem('current_win');
         
-        if(isSameDate(currentDate, localStoageSate)){
+        setWinAmount(localStorageWinAmount);
+        setLoseAmount(localStorageLoseAmount);
+
+        if(isSameDate(currentDate, localStoageDate)){
             if(isPlayed){
                 // Show stats
                 setCurrentWord(localStorageWord);
                 setNumOfGuesses(localStorageNumOfGuesses);
-                setWinAmount(localStorageWinAmount);
-                setLoseAmount(localStorageLoseAmount);
 
                 // Prev won or lose
                 setIsGameWon(localStorageIsWon);
@@ -71,7 +73,6 @@ function Game(){
             }
         }else{
             getNewWord();
-            addToLocalStorage('date', currentDate);
         }
     
     }
@@ -225,22 +226,30 @@ function Game(){
         addToLocalStorage('prev_word', currentWord);
         addToLocalStorage('num_of_guesses', numOfGuesses);
         const is_played = getLocalStorageItem('is_played');
+        const localStoageDate = getLocalStorageItem('date');
 
         let win = getLocalStorageItem('win');
         let lose = getLocalStorageItem('lose');
-
-        if(!is_played){ // In case user refresh the page he wont get more loses or wins          
+        /*
+             In case user refresh the page
+             Or after a new date 
+             he wont get more loses or wins 
+        */
+        if(!is_played || !isSameDate(currentDate, localStoageDate)){          
             if(isWon){
+                console.log('won');
                 addToLocalStorage('current_win', true);
                 addToLocalStorage('win', ++win);
                 addToLocalStorage('lose', lose);
                 setWinAmount(win);
             }else{
+                console.log('lose');
                 addToLocalStorage('current_win', false);
                 addToLocalStorage('lose', ++lose);
                 addToLocalStorage('win', win);
                 setLoseAmount(lose);
             }
+            addToLocalStorage('date', currentDate);
         }
         addToLocalStorage('is_played', true);
     }
