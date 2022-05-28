@@ -81,11 +81,19 @@ function Game(){
                 getNewWord();
             }
         }else{
+            cleanKeyBoard();
             getNewWord();
         }
     
     }
     
+    const cleanKeyBoard = () => {
+        const elements = document.getElementsByClassName('key');
+        Object.values(elements).map((element) => {
+            element.classList.remove('failed');
+            element.classList.remove('success')
+        })
+    }
 
     const getNewWord = () => {
         fetch(
