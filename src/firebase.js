@@ -14,21 +14,26 @@ const firebaseConfig = {
 
 
 //TODO: USE ONLY WHEN I NEED TO ADD NEW WORDS!
-// export function addNewWords(words) {
-//   const MAX = 1095;
+export function addNewWords() {
+  const MAX = 365;
 
-//   for(let i = 0; i < MAX; i++){
-        
-//         fetch(
-//             "https://random-word-api.herokuapp.com/word")
-//                 .then((res) => res.json())
-//                 .then((data) => {
-//                     const payload = {[data[0]]: false}
-                
-//                         words.add(payload);
-//         })
-//   }
-// }
+  const today = new Date();
+  const tomorrow = new Date(today);
+  const db = firebase.firestore();
+  const words = db.collection('words');
+  for(let i = 0; i < MAX; i++){
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const nextDate = tomorrow.getFullYear() + '-' + (tomorrow.getMonth() + 1) + '-' + tomorrow.getDate();
+    
+    fetch(
+            "https://random-word-api.herokuapp.com/word")
+                .then((res) => res.json())
+                .then((data) => {
+                    const payload = {[data[0]]: nextDate}
+                    words.add(payload);
+        })
+  }
+}
 
 
 // if needed
