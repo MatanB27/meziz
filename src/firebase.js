@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app"
 import 'firebase/compat/firestore';
-
+import {isSameDate} from './local-storage'
+import {convertStringToArray, buildJson} from './functions';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBC7ZKIuzBdSi7ABP1igonw0XWKnISUCjU",
@@ -10,7 +11,6 @@ const firebaseConfig = {
   messagingSenderId: "217885208163",
   appId: "1:217885208163:web:f8d305457a5943eaed9256"
 };
-
 
 
 //TODO: USE ONLY WHEN I NEED TO ADD NEW WORDS!
@@ -35,36 +35,35 @@ export function addNewWords() {
   }
 }
 
-
-// if needed
-// const db = firebase.firestore();
-        // const words = db.collection('words');
-        //TODO: DONT USE! 
-        // addNewWords(words);
-
-        // getNewWordWithFirebase(words, setCurrentWord);
-
-
 // Getting a random word
-export function getNewWordWithFirebase(words, setCurrentWord) {
+// We are checking the word that match with the current date
+export function getNewWordWithFirebase(setCurrentWord, setJsonWord) {
+
+  const today = new Date();
+  const currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+       
+  const db = firebase.firestore();
+  const words = db.collection('words');
+
+  let foundWord = false;
   words.onSnapshot((query) => {
-    const MAX_NUMBER = query.size;
-    const MIN_NUMBER = 0;
-    const randomNumber = parseInt(Math.random() * (MAX_NUMBER - MIN_NUMBER) + MIN_NUMBER);
-    let i = 0;
-    query.forEach(doc => {
-      i++;
-      if(i === randomNumber){
-        console.log(doc.data());
-      }
+    query.forEach((doc) => {
+        const object = doc.data();
+        const word = Object.keys(object)[0];
+        const date = Object.values(object)[0];
+
+        if(isSameDate(currentDate, date)) {
+          setCurrentWord(word);
+          setJsonWord(buildJson(convertStringToArray(word)));
+          foundWord = true;
+        }
+
+        if(foundWord) {
+          return false;
+        }
+
     })
   })
-  // words.onSnapshot((query) => {
-  //   query.forEach((doc) => {
-  //       const word = doc.data();
-  //       console.log(word);
-  //     })
-  //   })
 }
 
   firebase.initializeApp(firebaseConfig);

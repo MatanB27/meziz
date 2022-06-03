@@ -4,7 +4,7 @@ import Word from '../../components/word';
 import Keyboard from '../../components/keyboard';
 import Header from '../../components/header';
 // import calculateTimeLeft from '../../components/calculateTimeLeft';
-import firebase, {addNewWords, getNewWord} from '../../firebase';
+import firebase, {addNewWords, getNewWordWithFirebase} from '../../firebase';
 import {
     getLocalStorageItem,
     addToLocalStorage,
@@ -13,7 +13,7 @@ import {
     getKeyboardFromLS,
     } from '../../local-storage';
 import {handleKeyPress, handleEndGame, handleWinGame} from "../../rules";
-
+import {convertStringToArray, buildJson} from '../../functions'
 function Game(){
 
     const [jsonWord, setJsonWord] = useState(
@@ -78,11 +78,14 @@ function Game(){
                 }
 
             }else{
-                getNewWord();
+                // getNewWord();
+                cleanKeyBoard();
+                getNewWordWithFirebase(setCurrentWord, setJsonWord);
             }
         }else{
             cleanKeyBoard();
-            getNewWord();
+            // getNewWord();
+            getNewWordWithFirebase(setCurrentWord, setJsonWord)
         }
     
     }
@@ -95,32 +98,18 @@ function Game(){
         })
     }
 
-    const getNewWord = () => {
-        fetch(
-            "https://random-word-api.herokuapp.com/word")
-                .then((res) => res.json())
-                .then((data) => {
-                    const word  = getWord(data[0]);
-                    setCurrentWord(word);
-                    setJsonWord(buildJson(convertStringToArray(word)));
+    // OLD
+    // const getNewWord = () => {
+    //     fetch(
+    //         "https://random-word-api.herokuapp.com/word")
+    //             .then((res) => res.json())
+    //             .then((data) => {
+    //                 const word  = getWord(data[0]);
+    //                 setCurrentWord(word);
+    //                 setJsonWord(buildJson(convertStringToArray(word)));
                 
-        })
-    }
-
-    const buildJson = (wordArr) => {
-        let json = {wordArr:[]}
-        wordArr.forEach(word => {
-            const payload = {[word]: false}
-            json.wordArr.push(payload)
-        })
-        return json;
-    }
-
-    const convertStringToArray = (word) => {
-        return word.split('');
-    }
-
-    const getWord = (word) => word;
+    //     })
+    // }
 
     const handleKeyboard = (e) => {
         let currKey = e.target.getAttribute('data-key');

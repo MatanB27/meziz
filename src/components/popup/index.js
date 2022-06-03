@@ -14,15 +14,15 @@ function Popup(props){
                 onClick={() => setIsPopup(false)}></div>
             <div className={'popup '  + (!isPopup ? 'disabled' : '')}>
                 <div className='popup-text-wrapper'>
-                    <span className="popup-title">Rules</span>
+                    <span className="popup-title">How to play</span>
                     <span className='popup-text'>
                         Each day you will get a new FuzZle
-                        <br/>
+                        <br/><br/>
                         You have 10 guesses each game.
-                        <br/>
+                        <br/><br/>
                         Your goal is to find out what the current FuzZle is 
                         with the least amount of guesses.
-                        <br/>
+                        <br/><br/>
                         Good luck!
                         <span className='company'>FuzZle</span>
                     </span>
