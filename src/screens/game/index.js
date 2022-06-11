@@ -5,6 +5,7 @@ import Keyboard from '../../components/keyboard';
 import Header from '../../components/header';
 // import calculateTimeLeft from '../../components/calculateTimeLeft';
 import firebase, {addNewWords, getNewWordWithFirebase} from '../../firebase';
+import GoogleAd from '../../google-ad';
 import {
     getLocalStorageItem,
     addToLocalStorage,
@@ -280,6 +281,7 @@ function Game(){
                 }
                 
             </div>
+            <GoogleAd/>
             {/* <div className="person-wrapper">
                 <DrawMan
                     numOfGuesses={numOfGuesses}
