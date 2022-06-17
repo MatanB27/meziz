@@ -1,0 +1,20 @@
+.menu-wrapper{
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    right: 0;
+    background-color: rgb(50, 50, 50);
+    width: 90%;
+    height: 97vh;
+    transition: .4s ease-out;
+    transform: translateX(100%);
+    overflow: hidden;
+    
+    &.active{
+        visibility: visible;
+        transition: .4s ease-in;
+        transform: translateX(0);
+        overflow: hidden;
+        
+    }
+}

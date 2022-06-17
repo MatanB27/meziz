@@ -4,10 +4,11 @@ import QuestionMark from '../../images/circular-question-mark.png';
 import MenuIcon from '../../images/menu-icon.svg';
 import Popup from '../popup/';
 import {useState} from 'react';
-
+import Menu from '../menu';
 function Header(props){
 
     const [isPopup, setIsPopup] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const {
         numOfGuesses
@@ -15,6 +16,9 @@ function Header(props){
 
     return(
         <div className="header-wrapper">
+            <Menu
+                isMenuOpen = {isMenuOpen}
+            />
             <div className="header-left">
 
             </div>
@@ -34,7 +38,8 @@ function Header(props){
             </div>
 
             <div className="header-right">
-                <img class={"menu-img"} src={MenuIcon}/>
+                <img className={"menu-img"} src={MenuIcon}
+                onClick={() => {setIsMenuOpen(!isMenuOpen)}}/>
             </div>    
         </div>
     )
