@@ -18,9 +18,11 @@ function Header(props){
         <div className="header-wrapper">
             <Menu
                 isMenuOpen = {isMenuOpen}
+                setIsMenuOpen = {setIsMenuOpen}
             />
             <div className="header-left">
-
+            <img className={"menu-img"} src={MenuIcon}
+                onClick={() => {setIsMenuOpen(!isMenuOpen)}}/>
             </div>
 
             <div className="header-center">
@@ -38,8 +40,7 @@ function Header(props){
             </div>
 
             <div className="header-right">
-                <img className={"menu-img"} src={MenuIcon}
-                onClick={() => {setIsMenuOpen(!isMenuOpen)}}/>
+                
             </div>    
         </div>
     )
