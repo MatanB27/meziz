@@ -1,6 +1,6 @@
 import {React, useState} from 'react';
-
 import './index.scss';
+import Game from '../../screens/game';
 function Menu (props) {
 
     const {
@@ -19,9 +19,12 @@ function Menu (props) {
             </div>
             <div className="menu">
                 <div className="routes-wrapper">
-                    {/* <span>Route1</span>
-                    <span>Route2</span>
-                    <span>Route3</span> */}
+                    
+                        {/* <Routes>
+                            <Route path='/*' exact element={ <Game/>}/>
+                            <Route path='/aboutus' exact element={<AbousUs/>}/>
+                        </Routes> */}
+   
                 </div>
             </div>
         </div>
