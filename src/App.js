@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import Game from './screens/game/index'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
-
+import AboutUs from './screens/aboutus';
 function App() {
   return (
     <Router>
@@ -17,9 +17,3 @@ function App() {
 }
 
 export default App;
-
-function AboutUs()  {
-  return(
-      <div>About us</div>
-  )
-}

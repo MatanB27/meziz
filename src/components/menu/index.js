@@ -1,5 +1,6 @@
 import {React, useState} from 'react';
 import './index.scss';
+import {Link} from 'react-router-dom';
 import Game from '../../screens/game';
 function Menu (props) {
 
@@ -19,12 +20,8 @@ function Menu (props) {
             </div>
             <div className="menu">
                 <div className="routes-wrapper">
-                    
-                        {/* <Routes>
-                            <Route path='/*' exact element={ <Game/>}/>
-                            <Route path='/aboutus' exact element={<AbousUs/>}/>
-                        </Routes> */}
-   
+                    <Link to='/'>Fuzzle</Link>
+                    <Link to='/aboutus'>About us</Link>
                 </div>
             </div>
         </div>
