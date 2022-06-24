@@ -33,12 +33,12 @@
 
     .popup{
         display:block;
-        position: absolute;
+        position: fixed;
         background: #6b6b6b;
         height: 60%;
         width: 45%;
-        top: 24%;
-        left: 26%;
+        top: 20vw;
+        left: 26vw;
         transition: .2s;
         box-shadow: 3px 3px 7px 1px rgb(32, 32, 32);
         overflow: auto;
@@ -76,14 +76,16 @@
     .popup-wrapper{
     
         .black-screen{
-            height: 98vh;
-            width: 768px;
+            // height: 98vh;
+            // width: 768px;
             overflow: hidden;
         
         }
 
         .popup{
-           
+            width: 440px;
+            top: 14vw;
+            left: 39vw;
             .popup-text-wrapper{
 
                 .popup-title{

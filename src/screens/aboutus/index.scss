@@ -1,8 +1,35 @@
 .about-us-wrapper{
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
     height: 100vh;
     background-color: rgb(107, 107, 107);
     position: relative;
+    width: 100%;
+
+    .text-wrapper{
+        border: 1px solid grey;
+        padding: 40px;
+        margin: 0 auto;
+        margin-top: 40px;
+        overflow: auto;
+        width: 65vw;
+        height: 100vw;
+        .text{
+            color: white;
+            font-size: 5.5vw;
+        }
+    }
+}
+
+@media (min-width: 768px){
+    .about-us-wrapper{
+
+        .text-wrapper{
+            
+            width: 768px;
+            height: 60vh;
+            .text{
+                color: white;
+                font-size: 20px;
+            }
+        }
+    }
 }
