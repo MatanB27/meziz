@@ -1,7 +1,7 @@
 import {React, useState} from 'react';
 import './index.scss';
-import {Link} from 'react-router-dom';
-import Game from '../../screens/game';
+import {Link, NavLink} from 'react-router-dom';
+
 function Menu (props) {
 
     const {
@@ -20,8 +20,10 @@ function Menu (props) {
             </div>
             <div className="menu">
                 <div className="routes-wrapper">
-                    <Link to='/'>Fuzzle</Link>
-                    <Link to='/aboutus'>About us</Link>
+                    <NavLink class='link' activeClass='active' 
+                        to='/'>Fuzzle</NavLink>
+                    <NavLink class='link' activeClass='active' 
+                        to='/aboutus'>About us</NavLink>
                 </div>
             </div>
         </div>
